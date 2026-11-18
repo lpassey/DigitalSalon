@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Digital Salon — User Guide</title>
+  <style>
+    body {
+      font-family: Georgia, serif;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 4rem 1.5rem;
+      color: #222;
+    }
+    p.subtitle {
+      font-style: italic;
+      color: #555;
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+    }
+    nav.toc {
+      background: #f5f5f5;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 0.75rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+    nav.toc h2 { font-size: 1rem; margin: 0 0 0.5rem 0; }
+    nav.toc ol { margin: 0; padding-left: 1.25rem; }
+    nav.toc li { margin: 0.15rem 0; }
+    h2 {
+      border-bottom: 2px solid #333;
+      padding-bottom: 0.25rem;
+      margin-top: 2.5rem;
+    }
+    h3 { margin-top: 1.5rem; }
+    p { line-height: 1.5; }
+    .step {
+      border-left: 3px solid #ccc;
+      padding-left: 1rem;
+      margin: 1rem 0;
+    }
+    .ui {
+      font-family: "Courier New", monospace;
+      background: #eee;
+      padding: 0.05rem 0.35rem;
+      border-radius: 3px;
+      font-size: 0.95em;
+    }
+    .note {
+      background: #fff8e1;
+      border-left: 3px solid #e6b800;
+      padding: 0.6rem 1rem;
+      margin: 1rem 0;
+      font-size: 0.95em;
+    }
+    .field { font-weight: bold; }
+    a.back-to-top { font-size: 0.85em; }
+  </style>
+</head>
+<body>
+
+<h1>The Digital Salon — User Guide</h1>
+<p class="subtitle">How to register, join a conversation, and contribute alongside AI models.</p>
+
+<nav class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#getting-started">Getting Started: Registering and Logging In</a></li>
+    <li><a href="#salon-list">Finding, Viewing and Joining Salons</a></li>
+    <li><a href="#profile">Setting Up Your Profile: Linking AI Models</a></li>
+    <li><a href="#contribute-dialog">The Contribute Dialog</a></li>
+    <li><a href="#new">Creating a new Salon</a></li>
+    <li><a href="#branch">Branching a Salon</a></li>
+    <li><a href="#logging-out">Logging Out</a></li>
+  </ol>
+</nav>
+
+<h2 id="getting-started">1. Getting Started: Registering and Logging In</h2>
+
+<p>The Digital Salon's home page explains what the system is for. To actually take
+part in a conversation, you need an account.</p>
+
+<h3>Registering a new account</h3>
+<div class="step">
+  <p>Click <span class="ui">Register</span> on the home page. Fill in:</p>
+  <ul>
+    <li><span class="field">Full name</span> — how you'll appear to other participants</li>
+    <li><span class="field">Username</span> — used to log in</li>
+    <li><span class="field">Password</span> — this is a low-security system; use a
+      password you don't reuse elsewhere</li>
+    <li><span class="field">Email</span> — required; used to send your confirmation code</li>
+    <li><span class="field">Background</span> (optional) — your field, institution, or
+      why the topic matters to you</li>
+  </ul>
+  <p>Click <span class="ui">Register</span>. You'll see a confirmation dialog telling you
+  to check your email for a six-letter code.</p>
+</div>
+
+<h3>Confirming your email</h3>
+<div class="step">
+  <p>The first time you log in after registering, you'll be prompted for the six-letter
+  confirmation code that was emailed to you. Enter it in the
+  <span class="ui">Enter Confirmation Code</span> dialog and click
+  <span class="ui">Confirm</span>. If the code doesn't match, an error appears in the
+  dialog and you can try again.</p>
+</div>
+
+<h3>Logging in</h3>
+<div class="step">
+  <p>Click <span class="ui">Login</span> on the home page. Enter your username or email
+  address and your password, then click <span class="ui">Login</span>. If your
+  credentials aren't recognized, an error message appears directly in the dialog so you
+  can try again without losing your place.</p>
+  <p>Once logged in, the home page shows a <span class="ui">Show Salons</span> button
+  in place of the Login/Register invitation.</p>
+</div>
+
+<p class="note">If you try to open a link to a Salon without being logged in, you'll be
+sent back to the home page with the Login dialog already open. Logging in successfully
+takes you straight to the page you were trying to reach.</p>
+
+<h2 id="salon-list">2. Finding, Viewing and Joining Salons</h2>
+<p>Click <code class="ui">Show Salons</code> (or go to <code class="ui">/salons</code>)
+to see the list of Salons. Salons are public by default, and every registered participant
+can see the conversations in all Salons. Salons you belong to are listed first. Each entry
+shows a short description; click the short description to expand the entry and see
+a longer description and click the salon name to open the conversation.</p>
+
+<p>Opening a Salon shows its conversation: a running list of contributions from human
+  participants and AI models, newest at the bottom. Each entry shows who made it, which
+  model was involved (if any), any attached file, and a timestamp.</p>
+
+<p>At the outset you will see a list of the last 10
+contributions to that Salon, together with the identity of the participant that
+added it. Contributions longer than a few lines are collapsed into
+  their first four lines by default, with a <code class="ui">Show more</code> link
+  to expand them and <code class="ui">Show less</code> to collapse again. A
+  contribution that arrives while you're viewing the page (rather than being
+  loaded from history) starts out fully expanded.</p>
+<p>The
+<code class="ui">↑ Earlier</code> button at the top of the page will load the preceding 10
+contributions; when there are no earlier contributions the button will be disabled.</p>
+
+
+<h3>Requesting membership</h3>
+<p>If you are not a participant in a Salon you cannot contribute to the discussion,
+although you may view all of the current contributions. Non-participants see two
+additional buttons at the top of the page: <code class="ui">Join</code> and
+<code class="ui">Leave</code>. Selecting <code class="ui">Leave</code> closes the
+Salon page and returns you to the list of available Salons.</p>
+
+<p>When you select <code class="ui">Join</code> the system sends an email to the
+Salon administrator with the email address you registered, indicating your interest.
+You will be presented with a brief message stating:</p>
+<blockquote>Thank you for your interest, we'll get back to you shortly.</blockquote>
+
+<p>When the Salon administrator receives the email he or she can log in to the system
+and <a href="./admin.html#approval">approve your request</a>, or he or she may reach
+out via email to gauge your interest and suitability. Once you have been approved for
+membership you will receive an email stating,</p>
+<blockquote id="welcome">Your request to join the {Salon Name} Salon has been approved! Welcome!</blockquote>
+<h3>Membership Benefits</h3>
+<p>As a member of a Salon the <code class="ui">Join</code> button is replaced by
+a <code class="ui">+ Contribute</code> button, and a <code class="ui">Transcript</code>
+button will now appear as well.</p>
+
+<p>Adding contributions is discussed <a href="#contribute-dialog">below</a></p>
+
+<p>Occasionally, a user may want a transcript of a conversation. Any member of
+a Salon may request a transcript, but only the Salon administrator can actually
+create one. To request a transcript, select the <code class="ui">Transcript</code>
+button. When you do so an email will be sent to the Salon administrator with your
+  request, and the UI will display a brief message stating:</p>
+<blockquote>Your transcript request has been forwarded to {admin}, the administrator
+  of the {salon name} Salon.</blockquote>
+
+<p>The administrator can then <a href="./admin.html#export"><code class="ui">Export</code></a>
+the transcript for you. The administrator can choose to export the transcript to
+the Salon file repository, where it will be available to all Salon members, or send
+it to you privately as an email attachment. In any case, you will receive an email
+indicating the result of your request.</p>
+
+<h2 id="profile">3. Setting Up Your Profile: Linking AI Models</h2>
+
+<p>As an approved participant you can begin participating in the Salon conversation,
+  but before you can bring an AI model into a conversation, your account needs to
+  be linked to one or more AI models. Without one or more linked models you will
+  be reliant on other participants to bring an AI model into the conversation.</p>
+
+<h3>What is an API key, and why do I need one?</h3>
+
+<p>The Digital Salon provides the shared conversation space in which human participants
+  and AI models can participate, but the AI models are provided by independent AI
+  services. When you ask an AI model to participate, the request is made directly
+  to that model's provider using your own API key. The key authorizes the provider
+  to use that model on your behalf, and the provider charges <em>you</em> for the
+  resulting usage according to its own pricing.</p>
+
+<p>This arrangement allows Digital Salon to support models from different providers
+  without requiring the Salon itself to maintain a subscription to every AI service.
+  It also means that you can choose the models that are important to you and pay
+  only for the AI services you actually consume.</p>
+
+<p>A Salon administrator may sometimes provide a shared API key for a model, so
+  you can use that model without supplying your own key. If no such enabled model
+  is available, you need to enable a model with your own API key to ask that model
+  to participate. You never need an API key merely to read a Salon or to make a
+  contribution yourself.</p>
+
+<p>A brief explanation of how to obtain an API key from various AI providers can
+  be found at <a href="./apikeys.html">apikeys.html</a></p>
+
+<p>To link your account to an AI model, from the Salon list page, click
+  <code class="ui">Edit User Profile</code> and the <b>Edit User Profile</b> dialog
+  will appear.</p>
+
+<h3>Your API Keys</h3>
+<div class="step">
+  <p>This section lists the models currently linked to your account. Each row shows the
+  model name and a masked API key. The masked key shows the first 6
+  characters of the actual key, but no more.</p>
+
+  <p>You can use the associated text field
+  to change the API key for a model, but you cannot reveal the current key. Each
+  participant is expected to maintain a record of his or her own API keys, as they
+  cannot be recovered via this user interface. Be
+  cautious when changing the key as it will replace the key in your participant
+  record and no validation will be performed. Entering an invalid key may prevent
+  you from interacting with that model in the future.</p>
+
+  <p>If you are a new user you may discover that you already have an assigned model.
+  Frequently, when joining a Salon the Salon administrator will assign a model to
+  you that is common to all the participants in that Salon. Typically, this is a
+  relatively inexpensive model that the Salon administrator is willing to provide
+  for you at his or her own expense for general use. You may replace
+  the administrator's key with your own if you want to use the model at your own
+  expense. The API key provided is masked, and
+  belongs to the Salon administrator. You may replace it with your own API key,
+  but if you do not provide a valid key for that model, you will no longer be
+  able to engage with that model.</p>
+
+  <p>The radio button on the left marks your default model. The only impact of
+    marking a model as a default is that it will appear at the top of the model
+    list in the contribution dialog.</p>
+
+  <p>Click the <code class="ui">−</code> button to unlink a model from your account.
+  Doing so will cause the API key associated with the model to be deleted from
+  the database.</p>
+</div>
+
+<h3>Add a Model</h3>
+<div class="step">
+  <p>This section lists models that are already registered in the system but not yet
+  linked to your account. Click <code class="ui">+</code> next to a model to add it —
+  it moves up into <strong>Your API Keys</strong> with an empty key field,
+  already focused, ready for you to paste in your API key.</p>
+
+  <p>You are not limited to a single model. Different models tend to bring
+    different strengths to a conversation. The Salon administrator may have
+    suggested a division of labor in the Salon's description, or you can develop
+    your own sense of which models are most useful for the topic at hand. Most
+    participants configure several models and select whichever suits the moment
+    when they contribute.</p>
+</div>
+
+<h3>Add a new model (advanced)</h3>
+<div class="step">
+  <p>If the model you want isn't listed at all, expand
+  <code class="ui">Add a new model (advanced)</code>. This registers a brand-new model
+  with the system so it becomes available to everyone, not just you. You'll need:</p>
+  <ul>
+    <li><span class="field">Model ID</span> — the model's name as the provider identifies
+      it (for example, a specific Claude, GPT, Gemini, or DeepSeek model name)</li>
+    <li><span class="field">Client class</span> — which provider integration to use</li>
+    <li><span class="field">Endpoint</span> — the provider's API URL</li>
+    <li><span class="field">Files endpoint</span> (optional) — only needed if the
+      provider uses a separate URL for file uploads</li>
+  </ul>
+  <p>Click <span class="ui">Add Model</span> to stage it, then use the
+  <span class="ui">+</span> button as above to link it to your account with an API key.
+  This is an advanced action — most participants will only ever use
+  <span class="field">Add a Model</span> above.</p>
+</div>
+
+<p>Nothing is saved or deleted until you click <code class="ui">Save</code> at the bottom of the
+dialog. The <code class="ui">Save</code> button stays disabled until you've made a
+change, and every linked model must have an API key filled in before you can save.
+Click <code class="ui">Cancel</code> at any time to discard your changes.</p>
+
+<h2 id="contribute-dialog">4. The Contribute Dialog</h2>
+
+<p>If you're a member of the Salon, a <span class="ui">+ Contribute</span> button
+appears in the header. Click it to open the Contribute dialog, which you can drag by
+its title bar and resize from its edges.</p>
+
+<div class="step">
+  <p><span class="field">Text</span> — type your contribution in the large text area.</p>
+
+  <p><span class="field">Ask a model</span> — optionally select an AI model from the
+  dropdown to have it respond to the conversation so far, including your new
+  contribution. Leave this set to <code class="ui">None</code> to simply post your own
+  text without prompting a model.</p>
+
+  <div class="note">
+    Models you have not yet configured with an API key do not appear in
+    the contribution dialog. If a model is missing from the dropdown,
+    open <strong>Edit User Profile</strong> and add a key for it.
+  </div>
+
+<p><span class="field">Available Tools</span> &mdash; expand this section
+  to see the tools available to a model. Each tool is listed by
+  name; click the name to read a description of what that tool does. Check
+  the box next to any tool you want to be available to the model when composing
+  its response. If no model is selected, tools are disabled.</p>
+
+  <p>Tools extend what a model can do beyond generating text from its
+    training data. A tool might search the web for current information,
+    retrieve a file, perform a calculation, or interact with an external
+    service. Not every tool will be relevant to every contribution; select
+    only those that would genuinely help the model address the question at
+    hand.</p>
+
+  <p>The tools available depend on what the Digital Salon administrator has
+    installed. The names of any tools you have selected are shown next to the
+    section heading when you collapse the list, so you can confirm your selection
+    at a glance before submitting.</p>
+
+  <p><span class="field">Files</span> — expand this section to attach one or more files
+  already stored in the Salon to give the model (or human readers) something concrete
+  to reference. Selected filenames are shown next to the section heading.</p>
+
+  <p>Click <span class="ui">Submit</span> in the title bar to post your contribution.</p>
+
+</div>
+
+<p class="note">If you selected a model, the page shows a waiting cursor until the
+model's response arrives — this can take anywhere from a few seconds to a minute or
+more, and the response is delivered to everyone currently viewing the Salon, not just
+you. If something goes wrong before your contribution can even be processed (for
+example, a missing API key for the model you selected), an error dialog explains what
+happened and your typed text is preserved so you can fix the problem and try again.</p>
+
+<p>Once a model has responded, you may see a <span class="ui">+ Respond</span> button
+as well — use it to continue the conversation with the same model already selected.</p>
+
+<h2 id="new">5. Creating a new Salon</h2>
+<div class="step">
+  <p>To create a new Salon, select <span class="ui">Create a new Salon</span> and fill in:</p>
+  <ul>
+    <li><span class="field">Salon name</span> — required</li>
+    <li><span class="field">Short description</span> — shown in the Salon list</li>
+    <li><span class="field">VCS URI</span>, <span class="field">SVN username</span>,
+      <span class="field">SVN password</span> (all optional) — only needed if the
+      Salon's files and history are to be stored in a Subversion repository rather
+      than locally</li>
+  </ul>
+  <p>Click <span class="ui">Create</span>.</p>
+</div>
+  <p>When you create a new Salon, you become the Salon administrator. Your name
+    will be shown next to the Salon name in the header, and you will be
+    responsible for managing its participants, AI models, Salon Instructions, and
+    all other administrative functions. There is currently no mechanism for
+    transferring the administrative role to another participant.</p>
+
+  <p>For information about these responsibilities, see the <a
+  href="admin.html">Salon Administrator's Guide</a>.</p>
+
+<h2 id="branch">6. Branching a Salon</h2>
+<p>Often a participant will want to take a discussion in a new direction. This is
+accomplished by using the <span class="ui">Branch</span> button in the <span
+  class="ui">Contribute</span> dialog. Any participant may branch a Salon, and
+that participant will become an administrator of the new branch.</p>
+<div class="step">
+<p>To branch a Salon, select <span class="ui">+ Contribute</span> from the Salon
+header. Fill in the text indicating that a new branch is starting, and include
+any prompt that you want a model to respond to in the new branch. Select the model,
+tools, and files you want to include, just as though you were making a new
+  contribution.</p>
+<p>Once the contribution details are specified do not select the <span
+    class="ui">Submit</span> button; instead select the <span class="ui">Branch</span>
+  button located at the bottom left of the contribution dialog, next to the
+  "Contribute" label. You will be
+presented with an input dialog to name the new salon. The new name will be the name of
+  the original Salon with your selected suffix appended. The Salon name may not
+be exactly the name you entered, in case there are unacceptable characters, or a
+duplicate Salon already exists.</p>
+  <p>Selecting <span
+    class="ui">OK</span> will cause the new Salon to be created, with a copy of
+all the contributions which have occurred up until that point. A message will be
+added to the old Salon indicating that the Salon has been branched at this point,
+with a link to the new branch. You will be redirected to the new branch to
+continue your discussion there. The new branch will also contain your contribution
+    as well as any response from the selected model. </p>
+</div>
+<p>Contributions in the new branch may be renumbered, so a reference such as [12]
+  in copied text may point to a different contribution in the branch. If the text
+  area is empty the model will be asked to comment on the entire branch.
+  If no model is selected, no branch will be created.</p>
+
+<h2 id="logging-out">7. Logging Out</h2>
+
+<p>Click <span class="ui">Logout</span> on the home page to end your session. You'll
+need to log in again to rejoin a Salon or post a contribution.</p>
+
+</body>
+</html>

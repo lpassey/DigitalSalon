@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Digital Salon — Salon Administration Guide</title>
+    <style>
+        body {
+          font-family: Georgia, serif;
+          max-width: 900px;
+          margin: 0 auto;
+          padding: 1.5rem 1.5rem 4rem 1.5rem;
+          color: #222;
+        }
+        p.subtitle {
+          font-style: italic;
+          color: #555;
+          margin-top: 0;
+          margin-bottom: 1.5rem;
+        }
+        nav.toc {
+          background: #f5f5f5;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          padding: 0.75rem 1.5rem;
+          margin-bottom: 2rem;
+        }
+        nav.toc h2 { font-size: 1rem; margin: 0 0 0.5rem 0; }
+        nav.toc ol { margin: 0; padding-left: 1.25rem; }
+        nav.toc li { margin: 0.15rem 0; }
+        h2 {
+          border-bottom: 2px solid #333;
+          padding-bottom: 0.25rem;
+          margin-top: 2.5rem;
+        }
+        h3 { margin-top: 1.5rem; }
+        p { line-height: 1.5; }
+        .step {
+          border-left: 3px solid #ccc;
+          padding-left: 1rem;
+          margin: 1rem 0;
+        }
+        .ui {
+          font-family: "Courier New", monospace;
+          background: #eee;
+          padding: 0.05rem 0.35rem;
+          border-radius: 3px;
+          font-size: 0.95em;
+        }
+        .note {
+          background: #fff8e1;
+          border-left: 3px solid #e6b800;
+          padding: 0.6rem 1rem;
+          margin: 1rem 0;
+          font-size: 0.95em;
+        }
+        .field { font-weight: bold; }
+        a.back-to-top { font-size: 0.85em; }
+    </style>
+  </head>
+<body>
+
+<h1>The Digital Salon — Salon Administration Guide</h1>
+
+<h2>Accessing Salon Administration</h2>
+
+<p>Creating a Salon makes you its administrator, and the administrator
+is responsible for managing the Salon after it is created. This includes
+deciding who may participate, making AI models available to participants,
+maintaining Salon Instructions, and performing other administrative tasks.</p>
+
+<p>This guide describes the administrative functions available in the Digital
+Salon. If you have created a Salon, or have been granted administrator rights,
+an <code class="ui">Admin</code> button appears in the Salon's header. Selecting
+it opens the Salon Administration dialog.</p>
+
+<h3>Salon Instructions</h3>
+
+<p><b>Salon Instructions</b> contains a list of the Salon-specific system instructions
+presented to AI participants in this Salon. The <b>default.md</b> list item opens
+the <code class="ui">default.md</code> instruction file. These default instructions
+are sent to every AI model if no other provider specific instruction file is present.
+
+<p>The <b>New Instructions</b> list item allows an administrator
+to create a new Salon instructions oriented towards a specific AI provider. A new
+instruction file must be given one of the names provided by the <strong>Choose a
+name</strong> dropdown. The name identifies the AI provider to which the instructions
+apply; for example, <code class="ui">ClaudeClient.md</code> contains instructions
+intended for AI participants using the Claude provider.</p>
+
+<p>When selecting a new instruction file, the default instructions are first copied
+to the new file, which is then opened in a text input area for editing.</p>
+
+<p>For an introduction to using Salon Instructions to influence AI participants,
+including limitations and circumstances in which the instructions may not have
+the intended effect, see <a href="steering.html">Steering AI Participants with
+ Salon Instructions</a>.</p>
+
+<h3>Particiants</h3>
+<p>The <b>Participants</b> section lists everyone with a relationship to the Salon,
+    split into two sections:</p>
+
+<h4 id="approval">Requests</h4>
+<div class="step">
+    <p>Pending join requests — people who have requested to <span class="ui">Join</span>
+        this Salon but who have not yet been accepted. Clicking <span class="ui">+</span>
+        next to a name accepts a participant into the Salon, and moves the participant
+        into the <span class="field">Participants</span> list. It also sends a <a
+        href="./help.html#welcome">welcome email</a> to the new member.</p>
+</div>
+
+<h4>Enrolled</h4>
+<div class="step">
+    <p>Everyone currently approved to contribute to the Salon. Clicking
+        <span class="ui">−</span> next to a name removes them from participating
+        in the Salon. Removal takes effect immediately, with no confirmation step.</p>
+</div>
+
+<p>A salon can be effectively closed by simply removing all participants. The
+    Salon contributions will continue to be visible to all registered users, but
+    ordinary participants can no longer contribute.</p>
+
+<h3>Managing a participant's models</h3>
+<div>
+    <p>Click a participant's name, in either section, to open the Edit User Profile
+    dialog on their behalf; the same dialog described in <a
+    href="./help.html#profile">Setting Up Your Profile</a>, but specifically for
+    that particular participant. This allows a Salon administrator
+    to see which models the participant has selected and to add or update an
+    API key for them, just as they would for themselves. This dialog can also
+    be used to add a new model and API key on behalf of the participant in the
+    event that there is a Salon furnished model and API key that the participant
+    has not acquired personally.</p>
+</div>
+
+<h3 id="export">The Export button</h3>
+
+<p>The <code class="ui">Export</code> button opens a new dialog allowing a Salon
+    administrator to export a transcript of the conversation. It shows a
+    <strong>Destination</strong> box and two radio buttons: <code
+    class="ui">Email</code> and <code class="ui">File</code>. When <code
+    class="ui">Email</code> is selected the <strong>Destination</strong> box
+    is a dropdown list showing the current Salon members. Select the participant you
+    want to receive the transcript; click <code class="ui">OK</code> and the transcript
+    will be sent to that participant's registered email address.</p>
+
+<p>When <code class="ui">File</code> is selected the dropdown list is replaced with
+    a text entry box. Enter the filename that the transcript should be given, without
+    an extension. Click <code class="ui">OK</code> and the transcript will be generated
+    and saved as a Markdown file in Salon's file repository.</p>
+
+<p>If the operation succeeds the <strong>Export</strong> dialog closes
+    automatically. The Salon Administration dialog does not close automatically, as
+    other administrative tasks may remain. Select the <code class="ui">Close</code>
+    button to close the entire Administration dialog.</p>
+</body>
+</html>

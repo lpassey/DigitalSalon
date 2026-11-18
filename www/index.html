@@ -1,1 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Digital Salon: An environment for human&mdash;AI interaction</title>
+  <style>
+    p.subtitle {
+      font-style: italic;
+      color: #555;
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+    }
+    details {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-bottom: 0.75rem;
+      padding: 0;
+    }
+    details[open] {
+      padding-bottom: 0.75rem;
+    }
+    summary {
+      font-size: 1.05rem;
+      font-weight: bold;
+      padding: 0.6rem 0.9rem;
+      cursor: pointer;
+      background: #f5f5f5;
+      border-radius: 4px;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    summary::before {
+      content: "▶";
+      font-size: 0.7rem;
+      color: #777;
+      transition: transform 0.2s;
+      display: inline-block;
+    }
+    details[open] > summary::before {
+      transform: rotate(90deg);
+    }
+    summary::-webkit-details-marker { display: none; }
+    p { margin: 0 0 0.5rem 0; text-indent: 2rem }
+  </style>
 
+  <script type="text/javascript">
+    function submitForm( formId, url )
+    {
+      const form = document.getElementById( formId );
+      const data = new FormData( form );
+      fetch( url, { method: 'POST', body: new URLSearchParams( data ) } )
+          .then( r => r.text() )
+          .then( html => {
+              console.log( "submitForm response: " + html );
+              try {
+                  const json = JSON.parse( html );
+                  if (json.redirect) {
+                      document.querySelectorAll( 'dialog[open]' ).forEach( d => d.close() );
+                      window.location.href = json.redirect;
+                      return;
+                  }
+              }
+              catch (e) { /* not JSON, handle as HTML */ }
+              const temp = document.createElement( 'div' );
+              temp.innerHTML = html;
+              const scripts = temp.querySelectorAll( 'script' );
+              scripts.forEach( s => eval( s.textContent ) );
+          } );
+      return false;
+    }
+
+    window.addEventListener( 'load', function() {
+      const isLoggedIn = document.cookie.split( ';' ).some( c => c.trim().startsWith( 'participantId=' ) );
+      if ( isLoggedIn )
+      {
+          document.getElementById( 'participate-invitation' ).style.display = 'none';
+          document.getElementById( 'logged-in-controls' ).style.display = 'flex';
+      }
+      else
+      {
+         document.getElementById( 'participate-invitation' ).style.display = 'flex';
+         document.getElementById( 'logged-in-controls' ).style.display = 'none';
+
+      }
+
+      const params = new URLSearchParams( window.location.search );
+      if ( params.get( 'login' ) === 'required' )
+      {
+          document.getElementById( 'login-next' ).value = params.get( 'next' ) || '/salons';
+          document.getElementById( 'login-error' ).textContent = '';
+          document.getElementById( 'login-error' ).style.display = 'none';
+          document.getElementById( 'login-dialog' ).showModal();
+      }
+  } );
+
+  </script>
+</head>
+<body>
+<h1 style="text-align:center">The Digital Salon</h1>
+<h3 style="text-align:center">An environment for sustained human&mdash;AI interaction and deliberation.</h3><br/>
+<img src="./DeTroy-cropped.jpg" style="display: block; width: 70%; height: auto; margin: 0 auto;" /><br/>
+<!-- h3 class="subtitle">Purpose and Usefulness</h3 -->
+<details>
+  <summary>What It Is</summary>
+  <p>In the drawing rooms of Enlightenment-era Paris, philosophers, scientists,
+    writers, and skeptics gathered around a single table &mdash; not to lecture
+    one another, but to argue as equals. These salons became the informal engine
+    room of the Enlightenment: ideas were tested aloud, revised in real time,
+    and sharpened by disagreement long before they ever became widespread.</p>
+
+  <p>Inspired by these historical Salons, the Digital Salon is an orchestration
+    engine built for structured conversation between human and AI participants.
+    Just as a count and a commoner-turned-essayist could contest the same claim
+    on the same footing, in the Digital Salon people and AI models can examine
+    the same evidence together, offer their own evaluations of it, and respond
+    to one another as equals. It is the 18th-century salon's core discipline
+    &mdash; rigorous, mixed-company argument, conducted in good faith and in the
+    open &mdash; carried into a century that finally has the tools to do it at
+    scale.</p>
+
+  <p>Its first intended application was academic peer review, where several
+    domain experts and multiple AI models convened around a topic of inquiry,
+    each bringing their own evaluations of the evidence to a shared, ongoing
+    conversation, questioning each other's interpretations, and exposing
+    weaknesses.</p>
+
+  <p>The design has since proven more general than the conceived first use. The
+    same structure &mdash; several independent minds, human and AI, examining
+    the same evidence and discussing it &mdash; applies just as well to a
+    policy question or a philosophical debate with no single correct answer as
+    it does to a research paper's methodology.</p>
+</details>
+
+<details>
+  <summary>A Conference Room, Not a Courtroom</summary>
+
+  <p>Most tools that engage multiple AI models on the same topic are built
+    around resolution: gather several opinions, then synthesize them into one
+    answer. The Digital Salon deliberately does not do this.</p>
+
+  <p>Nothing here is designed to produce a verdict. There is no synthesis step
+    that declares a winner, no algorithm that decides when consensus has been
+    reached. A Salon is a meeting room, not a courtroom; what it produces is a
+    record of how several independent minds &mdash; some human, some not &mdash;
+    thought through the same topic, where they agreed, where they didn't,
+    and why. Every human participant reads that record and arrives at their own
+    conclusion. That is the goal, not an incidental byproduct.</p>
+
+  <p>Disagreement between participants &mdash; human or AI &mdash; is not a
+    problem to be resolved before the conversation can end. It's often the most
+    useful thing in the conversation. Two participants weighing the same
+    evidence and reaching different conclusions about what it supports is not a
+    failure of the system; it's exactly the kind of signal that a single
+    verdict would erase. The Digital Salon keeps that signal intact and hands
+    it to every human participant to weigh for themselves.</p>
+
+  <p>This shapes the whole system. A conversation only ends when a Salon's
+    administrator &mdash; a person, not a piece of software &mdash; judges it
+    has run its course. That call is not automated, because it isn't a call
+    software should be making.</p>
+</details>
+
+<details>
+  <summary>Every Participant, the Same Kind of Voice</summary>
+  <p>A contribution from a human and a contribution from an AI model are held
+    in exactly the same way in a Salon's record &mdash; same permanence, same
+    standing in the conversation, same visibility to everyone else in the
+    room. Nothing in the system treats one kind of participant as
+    authoritative and the other as advisory.</p>
+
+  <p>This matters because it changes what a human's role actually is. In a
+    Digital Salon, you are not the person a report gets delivered to once
+    the AI models have finished their work elsewhere. You're in the
+    conversation while it happens &mdash; reading what other participants have
+    said, adding your own reasoning, being responded to in turn, exactly as
+    any other participant would be.</p>
+</details>
+<details>
+  <summary>AI Instructions Shape the Contributions</summary>
+  <p>How a model is instructed changes what kind of participant it is. Humans
+    arrive at a Salon already shaped by a lifetime of norms for civil
+    disagreement. Similarly, an AI model doesn't arrive at a Salon as a blank
+    slate; it's been shaped by the contents of its training data, refined by
+    broad human feedback. That training becomes a quiet default: left alone,
+    a model tends to steer toward agreement and consensus, the way a dinner
+    guest raised to avoid conflict nods along even when they see a problem.</p>
+
+  <p>A system instruction is a standing directive that steers the model in a
+  desired direction. When prompted explicitly to surface disagreement rather
+  than resolve it, or to avoid consensus when unwarranted, the same model can
+  behave very differently.</p>
+
+  <p>The Digital Salon treats steering as infrastructure, not an afterthought.
+    Every Digital Salon host can set global instructions applying across all
+    Salons on their server; every Salon's administrator can add instructions
+    specific to that Salon's topic, and because different providers' default
+    training is different instructions can be tuned per model as well. Thus, a
+    Salon administrator is free to steer each AI model as he or she deems fit.</p>
+</details>
+<details>
+  <summary>Human-in-the-Loop as Active Capability</summary>
+  <p>A human participant in a Digital Salon brings capability that no AI model
+    has.</p>
+
+  <p>The clearest example is a paywall. An AI participant can identify that a
+    specific paper is relevant and potentially decisive, name it, explain
+    why it matters, and ask a human to retrieve it for the group. The human
+    obtains it through their own institutional channels, adds it to the Salon,
+    and now every participant, human and AI alike, is reasoning from a document
+    no AI could have reached on its own.</p>
+
+  <p>A second is running code. An AI can reason about an implementation and
+    predict likely failure modes, but it cannot actually execute it and watch
+    what happens. A human with a sandbox can run the paper's own code, vary
+    the inputs, check the results against what was reported, and bring the
+    output back into the conversation &mdash; verifying reproducibility, one of
+    the most important and most neglected parts of reviewing computational
+    work.</p>
+
+  <p>In both cases, the collaboration is natural rather than hierarchical: an
+    AI participant asks, a human participant acts, and the conversation
+    continues with more to work from than any one participant could have
+    assembled alone.</p>
+</details>
+
+<details>
+  <summary>Different Strengths, One Conversation</summary>
+  <p>Different AI providers bring genuinely different strengths and blind
+    spots to the same evidence. Rather than picking one model to trust, a
+    Salon can include several at once, each reading the same material and
+    responding to what the others have said; not isolated queries to
+    separate chatbots, but one shared conversation several participants are
+    actually in.</p>
+  <p>System instructions are what make this division possible in practice: the
+    same underlying steering mechanism that keeps one Salon's tone consistent
+    can just as easily be aimed differently per participant, so Gemini may be
+    nudged toward grounding claims while Claude may be nudged toward
+    interrogating the argument's structure.</p>
+  <p>A potential division of labor, informed by how these models tend to differ:</p>
+  <ul>
+    <li><strong> Gemini</strong>: grounding claims against current literature
+      via live search</li>
+    <li><strong> ChatGPT</strong>: checking citations with real specificity:
+      does the source exist, do these authors appear in it, does it actually say
+      what's claimed
+    </li>
+    <li><strong> Claude</strong>: examining methodology and the logical
+      structure of an argument &mdash; where a conclusion outruns its evidence
+    </li>
+    <li><strong> DeepSeek</strong>: technical and mathematical scrutiny where
+      the work is quantitative
+    </li>
+    <li><strong> Qwen</strong>: non-Western and multilingual sources where
+      relevant</li>
+  </ul>
+  <p>Every participant in a Salon sees the full conversation, including what
+    other participants &mdash; human or AI &mdash; have already contributed, and
+    respond to it directly.</p>
+</details>
+<details>
+  <summary>Room for Real Disagreement</summary>
+
+  <p>As noted above, AI models are trained, in part, on human approval, and
+    approval tends to correlate with agreement and consensus. That creates a
+    quiet, structural pull toward telling people what they want to hear, which
+    is exactly why getting an AI model to genuinely push back in an ordinary
+    chat can be difficult; doing so runs against its own training.</p>
+
+  <p>In addition to the use of specific instructions, that pull weakens
+    considerably when one AI participant is responding to another's reasoning
+    rather than to a human. There's no equivalent social reward for an AI model
+    to agree with another AI model; nothing pulling it toward validation just
+    because the other participant said it first.</p>
+
+  <p>The Digital Salon leans into this rather than working around it. Custom
+    instructions travel with every invocation, and for review work the default
+    was explicit: read critically, don't default to charitable interpretation.
+    Combined with several independently-trained models actually talking to
+    each other, and human participants free to weigh in with their own
+    disagreement at any point, the result is a conversation that's structurally
+    harder to steer toward premature agreement than either a single AI
+    session or a single human reviewer tends to be.</p>
+</details>
+
+<details>
+  <summary>Understanding How It Unfolded</summary>
+  <p>Nothing said in a Digital Salon is ever deleted or rewritten. If a Salon's
+    manager decides a tangent isn't worth an AI model's attention going
+    forward, that thread is set aside from future context &mdash; but it stays in
+    the record, exactly as it was said, for any participant to go back and
+    read.</p>
+
+  <p>This isn't about assigning blame for who said what. It's about being able
+    to see how a group's thinking actually evolved &mdash; what changed someone's
+    mind, where a disagreement started and whether it resolved or simply
+    stayed open. A conversation that only kept its final state would have
+    thrown away the part that's usually most worth reading.</p>
+</details><br />
+<div style="text-align:center; margin-top:-0.5rem;"><a href="./help.html">User Guide</a></div><br />
+
+<!-- ── Login / Register invitation ─────────────────────────── -->
+<div id="participate-invitation" style="margin-top:1rem; display:flex;
+    justify-content:center; gap:1rem; font-size:larger">
+  <strong>To participate:</strong>
+  <button onclick="document.getElementById('login-error').textContent='';
+      document.getElementById('login-error').style.display='none';
+      document.getElementById('login-dialog').showModal()">Login</button>
+  or
+  <button onclick="document.getElementById('register-error').textContent='';
+      document.getElementById('register-error').style.display='none';
+      document.getElementById('register-dialog').showModal()">Register</button>
+</div>
+
+<div id="logged-in-controls" style="display:none; margin-top:1em;
+    justify-content:center; gap:1rem; font-size:larger">
+  <button onclick="window.location.href='/salons'">Show Salons</button>
+</div>
+
+<!-- ── Login dialog ─────────────────────────────────────────── -->
+<dialog id="login-dialog">
+  <h2>Login</h2>
+  <form id="login-form" onsubmit="return submitForm('login-form', '/login')">
+  <div>
+    <label for="login-input">Username or email</label><br>
+    <input id="login-input" name="login" type="text" autocomplete="username">
+  </div>
+  <div>
+    <label for="login-password">Password</label><br>
+    <input id="login-password" name="password" type="password" autocomplete="current-password">
+  </div>
+  <div id="login-error" style="color:red; display:none;"></div>
+  <input type="hidden" id="login-next" name="next" value="" />
+  <div style="margin-top:1rem;">
+    <button type="submit">Login</button>
+    <button type="button" onclick="document.getElementById('login-dialog').close()">Cancel</button>
+  </div>
+  <div style="margin-top:1rem; font-size:0.9rem;">
+    New here?
+    <button type="button" onclick="
+      document.getElementById('login-dialog').close();
+      document.getElementById('register-error').textContent='';
+      document.getElementById('register-error').style.display='none';
+      document.getElementById('register-dialog').showModal();">
+      Register
+    </button>
+  </div>
+  </form>
+</dialog>
+
+<!-- ── Registration dialog ──────────────────────────────────── -->
+<dialog id="register-dialog">
+  <h2>Register</h2>
+  <form id="register-form" onsubmit="return submitForm('register-form', '/register')">
+  <div >
+    <label for="reg-fullname">Full name</label><br>
+    <input id="reg-fullname" name="full_name" type="text"  size="40" >
+  </div>
+  <div>
+    <label for="reg-username">Username</label><br>
+    <input id="reg-username" name="username" type="text" autocomplete="username">
+  </div>
+  <div>
+    <label for="reg-password">Password</label> <span style="font-size:small; color:#666; margin:0.25rem 0 0 0;">
+      (This is a low-security system. Please use a password you do not share
+      with other accounts.)</span><br/>
+    <input id="reg-password" name="password" type="password" autocomplete="new-password" required>
+  </div>
+  <div>
+    <label for="reg-email">Email</label><br>
+    <input id="reg-email" name="email" type="email" size="30" maxlength="254" required>
+  </div>
+  <div>
+    <label for="reg-background">Background <span style="font-weight:normal;">(optional)</span></label><br>
+    <textarea id="reg-background" name="background" rows="5" style="width: 100%; box-sizing: border-box"
+    placeholder="Tell us about yourself: your field, institution, or why this topic matters to you."></textarea>
+  </div>
+  <div id="register-error" style="color:red; display:none;"></div>
+  <div style="margin-top:1rem;">
+    <button type="submit">Register</button>
+    <button type="button" onclick="document.getElementById('register-dialog').close()">Cancel</button>
+  </div>
+  </form>
+</dialog>
+
+<!-- ── Registration success dialog ──────────────────────────── -->
+<dialog id="registration-success-dialog">
+  <h2>Registration Successful</h2>
+  <p>Check your email for a confirmation code. You will be asked
+    for it when you first log in.</p>
+  <button onclick="
+    document.getElementById('registration-success-dialog').close();
+    location.reload();">OK</button>
+</dialog>
+
+<!-- ── Confirmation code dialog ─────────────────────────────── -->
+<dialog id="confirm-dialog">
+  <h2>Enter Confirmation Code</h2>
+  <p>Enter the six-letter code sent to your email address.</p>
+  <form id="confirm-form" onsubmit="return submitForm('confirm-form', '/confirm')">
+    <input type="hidden" name="username" id="confirm-username">
+    <div>
+      <label for="confirm-code">Confirmation code</label><br>
+      <input id="confirm-code" name="login_code" type="text"
+      autocomplete="off" maxlength="6"
+      style="text-transform:uppercase; letter-spacing:0.3em;">
+    </div>
+    <div style="margin-top:1rem;">
+      <button type="submit">Confirm</button>
+      <button type="button"
+      onclick="document.getElementById('confirm-dialog').close()">
+        Cancel
+      </button>
+    </div>
+  </form>
+  <p id="confirm-error" style="display:none; color:red;"></p>
+</dialog>
+
+</body>
+
+</html>

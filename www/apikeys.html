@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Salon &mdash; Setting Up Your AI Models</title>
+  <style>
+    body {
+      font-family: Georgia, serif;
+      max-width: 780px;
+      margin: 2rem auto;
+      padding: 0 1.25rem;
+      background: #fafafa;
+      color: #222;
+      line-height: 1.6;
+    }
+    h1 { font-size: 1.6rem; margin-bottom: 0.25rem; }
+    h2 { font-size: 1.2rem; margin-top: 2rem; border-bottom: 1px solid #ccc; padding-bottom: 0.2rem; }
+    h3 { font-size: 1.05rem; margin-top: 1.5rem; margin-bottom: 0.25rem; }
+    p { margin: 0.6rem 0; }
+    ol, ul { margin: 0.5rem 0 0.5rem 1.5rem; }
+    li { margin-bottom: 0.3rem; }
+    .subtitle { font-style: italic; color: #555; margin-top: 0; }
+    .note {
+      background: #f0f4ff;
+      border-left: 3px solid #6699cc;
+      padding: 0.6rem 1rem;
+      margin: 1rem 0;
+      font-size: 0.95rem;
+    }
+    .provider {
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 1rem 1.25rem;
+      margin: 1.25rem 0;
+      background: #fff;
+    }
+    .provider h3 { margin-top: 0; }
+    .pricing {
+      font-size: 0.9rem;
+      color: #444;
+      margin-top: 0.75rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid #eee;
+    }
+    .free-tier {
+      color: #2a7a2a;
+      font-weight: bold;
+    }
+    a { color: #0055aa; }
+    a:visited { color: #551a8b; }
+    sup { font-size: 0.75em; }
+    .footnotes {
+      margin-top: 3rem;
+      border-top: 1px solid #ccc;
+      padding-top: 1rem;
+      font-size: 0.85rem;
+      color: #555;
+    }
+    .footnotes ol { margin-left: 1.25rem; }
+    .footnotes li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body>
+
+<h1>Obtaining an API key for an AI Model</h1>
+
+<p>The Digital Salon is a bring-your-own-key (BYOK) service. Rather than charging
+you for AI usage centrally, each participant connects directly to the AI
+providers they want to use. This means you control which models participate
+when you contribute, and you pay only for your own usage.</p>
+
+<p>Before you can ask an AI model to respond in a Salon, you need to add
+an API key for that model's provider to your profile. This page explains
+generally how to obtain an API key from various providers</p>
+
+<h2>What is an API Key?</h2>
+
+<p>An API key is a long string of characters &mdash; often starting with a
+short prefix like <code>sk-</code> or <code>AIza</code> &mdash; that identifies
+you to an AI provider's service. Think of it as a password that lets the
+Digital Salon make requests to that provider on your behalf.</p>
+
+<p>You create an API key by registering with the provider directly. Some
+providers offer a free tier or a free credit for new accounts, so you can
+try a model before committing to any cost, but such accommodations are becoming
+rare. In almost every case, when an API key is created it is displayed only once.
+It is therefore important that you create a safe storage environment for your
+API keys and that you copy them promptly to storage as soon as they are displayed.</p>
+<div class="note">
+  Your API key is stored encrypted in the Digital Salon database. It is decrypted
+  by the server only when needed to communicate with the corresponding AI
+  provider. It is never displayed in the Digital Salon user interface and is never
+  shared with other participants. It is transmitted only to the selected AI provider,
+  over an encrypted network connection.
+</div>
+<p>The sections below walk through some sample providers step by step.</p>
+
+<h2>Sample Providers</h2>
+<blockquote class="provider">
+  <h3>Mistral</h3>
+  <p>Mistral is a European AI company whose models are efficient and
+    perform well on structured analytical tasks. Mistral's smaller models
+    are available at no cost, making them a good option for participants
+    who want to try AI participation without any upfront expense.</p>
+  <ol>
+    <li>Go to <a href="https://console.mistral.ai" target="_blank">console.mistral.ai</a>
+      and create an account.</li>
+    <li>Open your profile or the API Keys section.</li>
+    <li>Select <strong>Create new key</strong>, give the key a name such as "Digital
+      Salon," and create it.</li>
+    <li>Copy the key immediately. Mistral displays the complete key only once.</li>
+  </ol>
+  <p class="pricing">
+    <strong>Pricing:</strong> <span class="free-tier">Mistral claims to offer a
+    free evaluation tier</span> that includes access to their smaller models via
+    the API at no cost, subject to rate limits, with no credit card required.
+    Widespread reports from the internet indicate that this claim is illusory.
+    Free "Experiment" keys trigger persistent HTTP 429 (code 1300) capacity
+    rejections regardless of quota balances. Current model pricing is listed
+    on Mistral's pricing page.<sup><a href="#fn5">1</a></sup>
+  </p>
+</blockquote>
+
+<blockquote class="provider">
+  <h3>Gemini &mdash; Google</h3>
+  <p>Google's Gemini models are available through Google AI Studio. Gemini is
+    particularly useful when a conversation benefits from Google's web-grounding
+    capabilities, such as when a conversation involves recent events, current
+    research, or facts that may have changed since an AI model's training data
+    was collected.</p>
+  <p>Gemini models are known to be overly agreeable when not carefully
+  steered by artfully crafted system instructions, so take that into consideration
+  when using Gemini.</p>
+  <ol>
+    <li>Go to <a href="https://aistudio.google.com" target="_blank">aistudio.google.com</a>
+      and sign in with your Google account.</li>
+    <li>Select <strong>Get API key</strong>, then
+      <strong>Create API key</strong>.</li>
+    <li>If Google asks you to select a project, use the default project created
+      by Google AI Studio. You do not need to create or manage a Google Cloud
+      project specifically for Digital Salon.</li>
+    <li>Copy the key and store it securely.</li>
+  </ol>
+  <p class="pricing">
+    <strong>Pricing:</strong> <span class="free-tier">Gemini Flash
+    models once offered a generous free tier via Google AI Studio</span>,
+    allowing prototyping and light use at no cost subject to rate
+    limits. These rate limits have been becoming increasingly restrictive, so
+    do not rely on the Flash models to have good availability. Pro and more
+    capable models require a paid plan. Google updates its model lineup and free
+    tier terms regularly; check the pricing page for which models are currently
+    available at no cost.<sup><a href="#fn3">2</a></sup>
+  </p>
+</blockquote>
+
+<blockquote class="provider">
+  <h3>DeepSeek</h3>
+  <p>DeepSeek is an AI lab whose models perform particularly well on
+    technical, mathematical, and quantitative analysis. They are also
+    among the least expensive models available, which makes them a
+    practical choice for conversations with high volumes of text.</p>
+  <ol>
+    <li>Go to <a href="https://platform.deepseek.com" target="_blank">platform.deepseek.com</a>
+      and register for an account.</li>
+    <li>Go to <strong>API Keys</strong> in the left sidebar and click
+      to create a new key.</li>
+    <li>Copy the key and store it securely.</li>
+  </ol>
+  <p class="pricing">
+    <strong>Pricing:</strong> DeepSeek is very inexpensive &mdash; a fraction
+    of a cent per typical Salon exchange for most models. DeepSeek has recently
+    introduced peak load pricing, but peak times are working hours in central
+    China, so peak pricing is rarely an issue in the Western Hemisphere.<sup><a
+      href="#fn4">3</a></sup>
+  </p>
+</blockquote>
+
+<blockquote class="provider">
+  <h3>Claude &mdash; Anthropic</h3>
+  <p>Claude is made by Anthropic. It is well suited to examining the
+  logical structure of arguments, identifying where conclusions outrun
+  their evidence, and producing careful, methodical analysis.</p>
+  <ol>
+    <li>Go to <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a>
+      and create a free account.</li>
+    <li>Once logged in, select <strong>API Keys</strong> in the left
+      sidebar.</li>
+    <li>Click <strong>Create Key</strong>, give it a name (e.g.
+      "Digital Salon"), and copy the key that appears. You will only
+      see it once, so copy it before closing the window.</li>
+  </ol>
+  <p class="pricing">
+    <strong>Pricing:</strong> Anthropic charges per token (roughly per
+    word processed). Claude Haiku is the least expensive model and
+    handles most conversational tasks well. Claude Sonnet and Opus cost
+    more but reason more carefully on complex problems. There is no
+    persistent free tier; you will need to add a prepaid credit balance
+    before your key will work. Usage in a typical Salon conversation is
+    modest.<sup><a href="#fn1">4</a></sup>
+  </p>
+</blockquote>
+
+<blockquote class="provider">
+  <h3>ChatGPT &mdash; OpenAI</h3>
+  <p>OpenAI's models are widely used and perform well at checking
+  whether specific citations exist, verifying that sources say what
+  is claimed, and general analytical tasks.</p>
+  <ol>
+    <li>Go to <a href="https://platform.openai.com" target="_blank">platform.openai.com</a>
+      and sign up for an account.</li>
+    <li>Open the menu under your name in the top right and select
+      <strong>API keys</strong>.</li>
+    <li>Click <strong>Create new secret key</strong>. Copy the key
+      immediately &mdash; OpenAI shows it only once.</li>
+  </ol>
+  <p class="pricing">
+    <strong>Pricing:</strong> OpenAI charges per token and requires a
+    prepaid credit balance before API keys will function. There is no
+    automatic free trial credit; you will need to add a minimum balance
+    (currently $5) before making your first request. Once funded, costs
+    per typical Salon exchange are modest. Current model options and
+    per-token rates are listed on OpenAI's pricing page.<sup><a
+    href="#fn2">5</a></sup>
+  </p>
+</blockquote>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn5">Mistral publishes current pricing and free tier
+      details at
+      <a href="https://mistral.ai/technology/#models" target="_blank">mistral.ai/technology/#models</a>.
+      Free tier availability and eligible models may change.</li>
+    <li id="fn3">Google publishes current Gemini API pricing and free
+      tier limits at
+      <a href="https://ai.google.dev/pricing" target="_blank">ai.google.dev/pricing</a>.
+      Free tier limits and eligible models change; check there before
+      assuming a model is free.</li>
+    <li id="fn4">DeepSeek publishes current pricing at
+      <a href="https://platform.deepseek.com/api-docs/pricing" target="_blank">platform.deepseek.com/api-docs/pricing</a>.
+      The free token allowance terms for new accounts may change.</li>
+    <li id="fn1">Anthropic publishes current pricing at
+      <a href="https://www.anthropic.com/pricing" target="_blank">anthropic.com/pricing</a>.
+      Rates change over time; check there for current figures.</li>
+    <li id="fn2">OpenAI publishes current pricing at
+      <a href="https://openai.com/api/pricing" target="_blank">openai.com/api/pricing</a>.
+      The minimum prepaid balance requirement may change; check the
+      platform for current billing terms.</li>
+   </ol>
+</div>
+
+</body>
+</html>
